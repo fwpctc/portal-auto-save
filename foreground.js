@@ -25,12 +25,14 @@ function autoSave() {
         var ele = document.getElementsByTagName("iframe")[0].contentDocument.getElementById("tinymce")
 
 observer = new MutationObserver(function(mutationsList, observer) {
-    window.localStorage.setItem(getAssignmentId(), mutationsList.at(-1).target.nodeValue)
+
+    console.log(mutationsList)
+    window.localStorage.setItem(getAssignmentId(), ele.innerHTML)
 });
 
 // call 'observe' on that MutationObserver instance, 
 // passing it the element to observe, and the options object
-observer.observe(ele, {characterData: true, childList: false, attributes: false, subtree:true});
+observer.observe(ele, {characterData: true, childList: true, attributes: false, subtree:true});
 
 document.getElementById("sub-button").onclick = () => {
     setTimeout(() => {
